@@ -6,7 +6,7 @@
 /*   By: roblabla </var/spool/mail/roblabla>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 14:06:26 by roblabla          #+#    #+#             */
-/*   Updated: 2015/06/11 14:46:03 by roblabla         ###   ########.fr       */
+/*   Updated: 2015/06/15 18:31:50 by rlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,19 @@
 # define PHONEBOOK_HPP
 # include<string>
 # include"Contact.hpp"
+
+# define MAX_CONTACTS 8
+
 class	PhoneBook {
-	Contact	contacts[8];
+	Contact	contacts[MAX_CONTACTS];
 	size_t	cursor;
 
 public:
 	void	add_contact(Contact);
 	Contact	search_contact(size_t id);
-	template<class Function>
-	void	for_each(Function fn)
-	{
-		size_t i = 0;
-		while (i < cursor)
-		{
-			fn(i, contacts[i]);
-			i++;
-		}
-	}
+	void	for_each(void (*fn)(int i, Contact c));
 	PhoneBook();
+	bool	can_add();
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: roblabla </var/spool/mail/roblabla>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 14:05:34 by roblabla          #+#    #+#             */
-/*   Updated: 2015/06/15 14:35:19 by roblabla         ###   ########.fr       */
+/*   Updated: 2015/06/15 18:33:20 by rlambert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int		main()
 	std::cout << "PhoneBook> ";
 	while (std::getline(std::cin, cmd) && cmd != "EXIT")
 	{
-		if (cmd == "ADD")
+		if (cmd == "ADD" && book.can_add())
 		{
 			try {
 				book.add_contact(prompt_add());
@@ -122,6 +122,8 @@ int		main()
 				return (0);
 			}
 		}
+		else if (cmd == "ADD")
+			std::cout << "Already too many items. Sorry :D" << std::endl;
 		else if (cmd == "SEARCH")
 		{
 			try {
