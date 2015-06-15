@@ -6,7 +6,7 @@
 /*   By: roblabla </var/spool/mail/roblabla>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/10 14:05:34 by roblabla          #+#    #+#             */
-/*   Updated: 2015/06/11 14:51:58 by roblabla         ###   ########.fr       */
+/*   Updated: 2015/06/15 14:35:19 by roblabla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,49 @@
 #include <iostream>
 #include "PhoneBook.hpp"
 
+std::string	getline(std::string str)
+{
+	std::string	buf;
+
+	std::cout << str;
+	if (!std::getline(std::cin, str))
+		throw std::runtime_error("Error reading line");
+	else
+		return (str);
+}
+
 Contact		prompt_add()
 {
 	return (Contact::Builder()
-			.first_name(Cin("first_name> "))
-			.last_name(Cin("last_name> "))
-			.nickname(Cin("nickname> "))
-			.postal_address(Cin("postal_address> "))
-			.email_address(Cin("email_address> "))
-			.phone_number(Cin("phone_number> "))
-			.birthday_date(Cin("birthday_date> "))
-			.favorite_meal(Cin("favorite_meal> "))
-			.underwear_color(Cin("underwear_color> "))
-			.darkest_secret(Cin("darkest_secret> "))
+			.first_name(getline("first_name> "))
+			.last_name(getline("last_name> "))
+			.nickname(getline("nickname> "))
+			.postal_address(getline("postal_address> "))
+			.email_address(getline("email_address> "))
+			.phone_number(getline("phone_number> "))
+			.birthday_date(getline("birthday_date> "))
+			.favorite_meal(getline("favorite_meal> "))
+			.underwear_color(getline("underwear_color> "))
+			.darkest_secret(getline("darkest_secret> "))
 			.build());
+}
+
+std::string	str_times(std::string str, unsigned i)
+{
+	unsigned	j = 0;
+	std::string res = "";
+	while (j < i)
+	{
+		res += str;
+		j++;
+	}
+	return (res);
 }
 
 std::string	str_tbl(std::string str, unsigned i)
 {
 	if (str.length() <= i)
-		return (str.resize(i, ' '), str);
+		return (str_times(" ", i - str.length()) + str);
 	else
 		return (str.substr(0, i - 1) + ".");
 }
@@ -75,7 +98,7 @@ int		prompt_contact()
 
 	std::cout << "ID> ";
 	if (!(std::cin >> out))
-		throw std::string("bleh");
+		throw std::runtime_error("bleh");
 	return (out);
 }
 
@@ -86,15 +109,17 @@ int		main()
 
 	cmd = "";
 	std::cout << "PhoneBook> ";
-	while ((std::cin >> cmd) && cmd != "EXIT")
+	while (std::getline(std::cin, cmd) && cmd != "EXIT")
 	{
 		if (cmd == "ADD")
 		{
 			try {
 				book.add_contact(prompt_add());
-			} catch (std::range_error e)
-			{
-				std::cout << "Already too many items. Sorry :D";
+			} catch (std::range_error e) {
+				std::cout << "Already too many items. Sorry :D" << std::endl;
+			} catch (std::runtime_error e) {
+				std::cout << "Goodbye!" << std::endl;
+				return (0);
 			}
 		}
 		else if (cmd == "SEARCH")
@@ -103,14 +128,24 @@ int		main()
 				show_header();
 				book.for_each(show_contact);
 				show_contact_full(book.search_contact(prompt_contact()));
-			} catch (std::string e) {
-				std::cout << "ID should be a string";
-				std::cin.clear();
 			} catch (std::range_error e) {
-				std::cout << "Index out of range";
+				std::cout << "Index out of range" << std::endl;
+			} catch (std::runtime_error e) {
+				if (std::string(e.what()) == "bleh")
+				{
+					std::cin.clear();
+					std::cout << "ID should be a string" << std::endl;
+				}
+				else
+				{
+					std::cout << "Goodbye!" << std::endl;
+					return 0;
+				}
 			}
+			std::cin.ignore(10000, '\n');
 		}
 		std::cout << std::endl << "PhoneBook> ";
 	}
 	std::cout << std::endl;
+	return (0);
 }

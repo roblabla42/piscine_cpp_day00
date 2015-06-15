@@ -6,16 +6,17 @@
 #    By: rlambert <rlambert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/03 11:25:08 by rlambert          #+#    #+#              #
-#    Updated: 2015/06/11 14:49:08 by roblabla         ###   ########.fr        #
+#    Updated: 2015/06/15 14:29:31 by roblabla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = suxbook
 
+CXX=clang++
+
 CFLAGS += -Wall -Wextra -Werror
 
 SRCS = main.cpp \
-	   Cin.cpp \
 	   Contact.cpp \
 	   PhoneBook.cpp
 
@@ -34,10 +35,11 @@ obj/%.o: %.cpp
 	$(CXX) -O0 -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 $(NAME): $(OBJS)
-	$(CXX) -o $@ $(OBJS)
+	$(CXX) -o $@ $(OBJS) $(CFLAGS)
 
 clean:
 	$(RM) $(OBJS)
+	$(RM) -r obj/
 
 fclean: clean
 	$(RM) $(NAME)

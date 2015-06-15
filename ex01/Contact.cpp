@@ -6,7 +6,7 @@
 /*   By: roblabla </var/spool/mail/roblabla>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/11 14:43:56 by roblabla          #+#    #+#             */
-/*   Updated: 2015/06/11 14:48:21 by roblabla         ###   ########.fr       */
+/*   Updated: 2015/06/15 14:05:38 by roblabla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,56 +79,6 @@ std::string		Contact::darkest_secret()
 // TODO : Provide sane defaults
 Contact::Builder::Builder()
 {
-}
-
-Contact::Builder	&Contact::Builder::first_name(Cin name)
-{
-	return (this->first_name(name()));
-}
-
-Contact::Builder	&Contact::Builder::last_name(Cin name)
-{
-	return (this->last_name(name()));
-}
-
-Contact::Builder	&Contact::Builder::nickname(Cin name)
-{
-	return (this->nickname(name()));
-}
-
-Contact::Builder	&Contact::Builder::postal_address(Cin name)
-{
-	return (this->postal_address(name()));
-}
-
-Contact::Builder	&Contact::Builder::email_address(Cin name)
-{
-	return (this->email_address(name()));
-}
-
-Contact::Builder	&Contact::Builder::phone_number(Cin name)
-{
-	return (this->phone_number(name()));
-}
-
-Contact::Builder	&Contact::Builder::birthday_date(Cin name)
-{
-	return (this->birthday_date(name()));
-}
-
-Contact::Builder	&Contact::Builder::favorite_meal(Cin name)
-{
-	return (this->favorite_meal(name()));
-}
-
-Contact::Builder	&Contact::Builder::underwear_color(Cin name)
-{
-	return (this->underwear_color(name()));
-}
-
-Contact::Builder	&Contact::Builder::darkest_secret(Cin name)
-{
-	return (this->darkest_secret(name()));
 }
 
 Contact::Builder	&Contact::Builder::first_name(std::string name)

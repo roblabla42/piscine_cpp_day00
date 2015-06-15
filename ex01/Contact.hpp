@@ -6,7 +6,7 @@
 /*   By: roblabla </var/spool/mail/roblabla>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/11 14:32:25 by roblabla          #+#    #+#             */
-/*   Updated: 2015/06/11 14:48:00 by roblabla         ###   ########.fr       */
+/*   Updated: 2015/06/15 14:05:51 by roblabla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CONTACT_HPP
 
 # include<string>
-# include"Cin.hpp"
 
 class Contact {
 	std::string		_first_name;
@@ -63,16 +62,6 @@ class Contact::Builder {
 
 public:
 	Builder();
-	Builder	&first_name(Cin first_name);
-	Builder	&last_name(Cin last_name);
-	Builder	&nickname(Cin nickname);
-	Builder	&postal_address(Cin postal_address);
-	Builder	&email_address(Cin email_address);
-	Builder	&phone_number(Cin phone_number);
-	Builder	&birthday_date(Cin birthday_date);
-	Builder	&favorite_meal(Cin favorite_meal);
-	Builder	&underwear_color(Cin underwear_color);
-	Builder	&darkest_secret(Cin darkest_secret);
 	Builder	&first_name(std::string first_name);
 	Builder	&last_name(std::string last_name);
 	Builder	&nickname(std::string nickname);
